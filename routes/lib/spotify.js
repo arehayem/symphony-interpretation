@@ -9,7 +9,7 @@ var spotifyApi = new SpotifyWebApi({
 
 var conductorsList = require('./conductors_list.json');
 
-const RESULTS_LIMIT = 50;
+const RESULTS_LIMIT = 10;
 
 // Retrieve an access token.
 spotifyApi.clientCredentialsGrant().then(
@@ -26,14 +26,17 @@ spotifyApi.clientCredentialsGrant().then(
 );
 
 function searchSpotifyAlbums(album, conductor) {
-	return spotifyApi.search(album + ' ' + /*'symphony' + ' ' +*/ 'artist:' + conductor, ['album'], {limit: RESULTS_LIMIT}).then(
+  console.log('album:', album);
+  console.log('conductor:', conductor);
+	return spotifyApi.search('artist:' + album + ' ' + conductor + ' ' + 'symphon*', ['album'], {limit: RESULTS_LIMIT}).then(
 	  function(data) {
+      console.log(data.body.albums.href);
       return augmentAlbums(filterAlbums(data.body.albums.items));
 	  }
 	).then(function(data) {
-    return mapAlbums(data);
+    return mapAlbums(data, conductor);
   }).catch(function(error) {
-    console.log(err);
+    console.log('searchSpotifyAlbums error', err);
   });
 }
 
@@ -56,12 +59,13 @@ function filterAlbums(albums) {
   return albums.filter(album => album.name.toUpperCase().includes('SYMPHON'));
 }
 
-function mapAlbums(albums) {
+function mapAlbums(albums, conductor) {
   return albums.map(album => ({
     id: album.body.id,
     href: album.body.href,
     name: album.body.name,
     artists: album.body.artists,
+    conductor: conductor,
     images: album.body.images,
     external_urls: album.body.external_urls
   }));

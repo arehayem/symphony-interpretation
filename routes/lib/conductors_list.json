@@ -1,6 +1,10 @@
 {
   "conductors": [
     {
+      "first_name": "Osmo",
+      "last_name": "Vanska"
+    },
+    {
       "first_name": "Herbert",
       "last_name": "Karajan"
     },
@@ -17,10 +21,6 @@
       "last_name": "Klieber"
     },
     {
-      "first_name": "George",
-      "last_name": "Szell"
-    },
-    {
       "first_name": "Simon",
       "last_name": "Rattle"
     },
@@ -31,6 +31,22 @@
     {
       "first_name": "Charles",
       "last_name": "Dutoit"
+    },
+    {
+      "first_name": "Georg",
+      "last_name": "Solti"
+    },
+    {
+      "first_name": "Claudio",
+      "last_name": "Abbado"
+    },
+    {
+      "first_name": "Valery",
+      "last_name": "Gergiev"
+    },
+    {
+      "first_name": "Seiji",
+      "last_name": "Ozawa"
     }
   ]
 }

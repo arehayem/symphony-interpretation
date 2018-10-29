@@ -10,6 +10,10 @@ router.get('/', function(req, res, next) {
   spotify.getAlbums(req, res);
 });
 
+router.get('/tracks', function(req, res, next) {
+  spotify.getTracks(req, res);
+});
+
 router.get('/single', function(req, res, next) {
   spotify.singleSearch(req, res);
 });

@@ -26,8 +26,6 @@ spotifyApi.clientCredentialsGrant().then(
 );
 
 function searchSpotifyAlbums(album, conductor) {
-  console.log('album:', album);
-  console.log('conductor:', conductor);
 	return spotifyApi.search('artist:' + album + ' ' + conductor + ' ' + 'symphon*', ['album'], {limit: RESULTS_LIMIT}).then(
 	  function(data) {
       console.log(data.body.albums.href);
@@ -71,6 +69,15 @@ function mapAlbums(albums, conductor) {
   }));
 }
 
+function getTracks(req, res) {
+  spotifyApi.getAlbumTracks(req.query.albumId).then(function(data) {
+    res.json(data);
+  }).catch(function(err) {
+    console.log('getTracks error:');
+    console.log(err);
+  });
+}
+
 function getAlbums(req, res) {
   getAlbumsByConductor(req.query.search).then(function(data) {
     data = data.filter(datum => datum.length > 0);
@@ -90,4 +97,5 @@ function singleSearch(req, res) {
 }
 
 exports.getAlbums = getAlbums;
+exports.getTracks = getTracks;
 exports.singleSearch = singleSearch;
